@@ -11,7 +11,7 @@ API Used: Open-Meteo (https://open-meteo.com/) - free, no API key required
 
 import sqlite3
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # ─── EXTRACT ────────────────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ def transform(raw_data: dict) -> list[dict]:
             "temperature_celsius": temp,
             "latitude": latitude,
             "longitude": longitude,
-            "ingested_at": datetime.utcnow().isoformat()
+            "ingested_at": datetime.now(timezone.utc).isoformat()
         })
     return records
 
